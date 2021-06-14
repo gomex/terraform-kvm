@@ -27,6 +27,9 @@ data "template_file" "user_data" {
 
 data "template_file" "network_config" {
   template = file("${path.module}/network_config.cfg")
+  vars = {
+    ip_address = var.ip_address
+  }
 }
 
 # for more info about paramater check this out
