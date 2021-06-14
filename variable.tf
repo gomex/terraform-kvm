@@ -59,3 +59,7 @@ variable "kvm_host" {
   type = string
   default = "127.0.0.1"
 }
+
+variable "kvm_user" {
+  type = string
+}
