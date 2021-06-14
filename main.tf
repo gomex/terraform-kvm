@@ -13,10 +13,15 @@ provider "libvirt" {
   uri = "qemu+ssh://${var.kvm_user}@${var.kvm_host}/system"
 }
 
+resource "libvirt_pool" "cluster" {
+  name = "cluster"
+  type = "dir"
+}
+
 # We fetch the latest ubuntu release image from their mirrors
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = var.domain_name
-  pool   = "default"
+  pool   = libvirt_pool.cluster.name
   source = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64-disk-kvm.img"
   format = "qcow2"
 }
@@ -43,7 +48,7 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   name           = "commoninit-${var.domain_name}.iso"
   user_data      = data.template_file.user_data.rendered
   network_config = data.template_file.network_config.rendered
-  pool           = "default"
+  pool   = libvirt_pool.cluster.name
 }
 
 # Create the machine
