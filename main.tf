@@ -15,7 +15,7 @@ provider "libvirt" {
 
 # We fetch the latest ubuntu release image from their mirrors
 resource "libvirt_volume" "ubuntu-qcow2" {
-  name   = "ubuntu-qcow2"
+  name   = var.domain_name
   pool   = "default"
   source = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64-disk-kvm.img"
   format = "qcow2"
