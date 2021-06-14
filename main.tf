@@ -29,6 +29,9 @@ data "template_file" "network_config" {
   template = file("${path.module}/network_config.cfg")
   vars = {
     ip_address = var.ip_address
+    gateway4 = var.gateway4
+    primary_nameserver = var.primary_nameserver
+    secondary_nameserver = var.secondary_nameserver
   }
 }
 
@@ -46,14 +49,13 @@ resource "libvirt_cloudinit_disk" "commoninit" {
 # Create the machine
 resource "libvirt_domain" "domain-ubuntu" {
   name   = var.domain_name
-  memory = "512"
-  vcpu   = 1
+  memory = var.memory
+  vcpu   = var.cpu
 
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
   network_interface {
     bridge = "br0"
-    mac    = "52:54:00:b2:2f:86"
   }
 
   # we need to pass it
