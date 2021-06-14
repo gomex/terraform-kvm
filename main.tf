@@ -10,7 +10,7 @@ terraform {
 
 # instance the provider
 provider "libvirt" {
-  uri = "qemu:///system"
+  uri = "qemu+ssh://root@${var.kvm_host}/system"
 }
 
 # We fetch the latest ubuntu release image from their mirrors
