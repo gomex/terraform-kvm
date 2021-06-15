@@ -22,7 +22,7 @@ resource "libvirt_volume" "ubuntu-qcow2" {
 }
 
 resource "libvirt_volume" "var-qcow2" {
-  name   = var.domain_name
+  name   = "${var.domain_name}-var"
   pool   = "default"
   format = "qcow2"
   size = var.disk_size
