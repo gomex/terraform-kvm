@@ -26,6 +26,7 @@ resource "libvirt_volume" "extra-storage-qcow2" {
   pool   = "default"
   format = "qcow2"
   size = var.extra_storage_size
+  count = var.extra_storage ? 1 : 0
 }
 
 data "template_file" "user_data" {
@@ -90,7 +91,7 @@ resource "libvirt_domain" "domain-ubuntu" {
   dynamic "disk" {
     for_each = var.extra_storage ? [1] : []
     content {
-      volume_id             = libvirt_volume.extra-storage-qcow2.id
+      volume_id             = libvirt_volume.extra-storage-qcow2[0].id
     }
   }
 
