@@ -21,7 +21,7 @@ resource "libvirt_volume" "ubuntu-qcow2" {
   format = "qcow2"
 }
 
-resource "libvirt_volume" "ubuntu-qcow2" {
+resource "libvirt_volume" "extra-storage-qcow2" {
   name   = "${var.domain_name}-extra_storage"
   pool   = "default"
   format = "qcow2"
