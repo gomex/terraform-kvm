@@ -86,10 +86,13 @@ resource "libvirt_domain" "domain-ubuntu" {
     volume_id = libvirt_volume.ubuntu-qcow2.id
   }
 
-  disk {
-    volume_id = var.extra_storage ? libvirt_volume.extra-storage-qcow2.id : null
-  }
   
+  dynamic "disk" {
+    for_each = var.extra_storage ? [] : [1]
+    content {
+      volume_id             = libvirt_volume.extra-storage-qcow2.id
+    }
+  }
 
   graphics {
     type        = "spice"
