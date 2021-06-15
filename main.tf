@@ -22,6 +22,13 @@ resource "libvirt_volume" "ubuntu-qcow2" {
   size = var.disk_size
 }
 
+resource "libvirt_volume" "var-qcow2" {
+  name   = var.domain_name
+  pool   = "default"
+  format = "qcow2"
+  size = var.disk_size
+}
+
 data "template_file" "user_data" {
   template = file("${path.module}/cloud_init.cfg")
 }
@@ -75,6 +82,10 @@ resource "libvirt_domain" "domain-ubuntu" {
 
   disk {
     volume_id = libvirt_volume.ubuntu-qcow2.id
+  }
+
+  disk {
+    volume_id = libvirt_volume.var-qcow2.id
   }
 
   graphics {
