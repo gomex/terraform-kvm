@@ -19,6 +19,7 @@ resource "libvirt_volume" "ubuntu-qcow2" {
   pool   = "default"
   source = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64-disk-kvm.img"
   format = "qcow2"
+  size = var.disk_size
 }
 
 data "template_file" "user_data" {

@@ -51,8 +51,13 @@ variable "memory" {
 }
 
 variable "cpu" {
-  type = string
+  type = number
   default = 1
+}
+
+variable "disk_size" {
+  type = number
+  default = 20000000000
 }
 
 variable "kvm_host" {
