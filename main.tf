@@ -17,7 +17,7 @@ provider "libvirt" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = var.domain_name
   pool   = "default"
-  source = "http://dnsfilter-kvm-volume.s3-website-us-east-1.amazonaws.com/template-ubuntu-20.04-scratch.qcow2"
+  source = "http://dnsfilter-kvm-volume.s3-website-us-east-1.amazonaws.com/ubuntu-20.04-server-cloudimg-amd64-disk-kvm.img"
   format = "qcow2"
 }
 
