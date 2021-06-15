@@ -23,6 +23,9 @@ resource "libvirt_volume" "ubuntu-qcow2" {
 
 data "template_file" "user_data" {
   template = file("${path.module}/cloud_init.cfg")
+  vars = {
+    domain_name = var.domain_name
+  }
 }
 
 data "template_file" "network_config" {
