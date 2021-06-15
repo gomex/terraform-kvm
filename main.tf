@@ -17,15 +17,8 @@ provider "libvirt" {
 resource "libvirt_volume" "ubuntu-qcow2" {
   name   = var.domain_name
   pool   = "default"
-  source = "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64-disk-kvm.img"
+  source = "http://dnsfilter-kvm-volume.s3-website-us-east-1.amazonaws.com/template-ubuntu-20.04-scratch.qcow2"
   format = "qcow2"
-}
-
-resource "libvirt_volume" "var-qcow2" {
-  name   = "${var.domain_name}-var"
-  pool   = "default"
-  format = "qcow2"
-  size = var.disk_size
 }
 
 data "template_file" "user_data" {
@@ -81,10 +74,6 @@ resource "libvirt_domain" "domain-ubuntu" {
 
   disk {
     volume_id = libvirt_volume.ubuntu-qcow2.id
-  }
-
-  disk {
-    volume_id = libvirt_volume.var-qcow2.id
   }
 
   graphics {
