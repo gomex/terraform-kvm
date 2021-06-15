@@ -87,7 +87,7 @@ resource "libvirt_domain" "domain-ubuntu" {
   }
 
   disk {
-    volume_id = var.extra_storage ? libvirt_volume.extra_storage-qcow2.id : null
+    volume_id = var.extra_storage ? libvirt_volume.extra-storage-qcow2.id : null
   }
   
 
