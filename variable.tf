@@ -55,7 +55,7 @@ variable "cpu" {
   default = 1
 }
 
-variable "disk_size" {
+variable "extra_storage_size" {
   type = number
   default = 20000000000
 }
@@ -67,4 +67,9 @@ variable "kvm_host" {
 
 variable "kvm_user" {
   type = string
+}
+
+variable "extra_storage" {
+  type = bool
+  default = false
 }
